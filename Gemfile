@@ -40,3 +40,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "vite_rails", "~> 3.0"
