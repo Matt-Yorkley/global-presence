@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
+    "@rails/actioncable": "^7.0.1",
     "stimulus": "^3.0.1",
     "stimulus-vite-helpers": "^3.0.0",
     "stimulus_reflex": "3.5.0-pre8"
