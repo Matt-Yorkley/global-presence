@@ -4,6 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "stimulus": "^3.0.1",
+    "stimulus-vite-helpers": "^3.0.0",
     "stimulus_reflex": "3.5.0-pre8"
   },
   "devDependencies": {
