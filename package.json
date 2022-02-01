@@ -2,6 +2,10 @@
   "name": "global-presence",
   "version": "1.0.0",
   "license": "MIT",
+  "dependencies": {
+    "stimulus": "^3.0.1",
+    "stimulus_reflex": "3.5.0-pre8"
+  },
   "devDependencies": {
     "vite": "^2.7.7",
     "vite-plugin-ruby": "^3.0.5"

@@ -42,3 +42,5 @@ end
 
 
 gem "vite_rails", "~> 3.0"
+
+gem "stimulus_reflex", "~> 3.5.0-pre8"
