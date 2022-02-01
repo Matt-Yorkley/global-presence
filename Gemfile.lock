@@ -83,6 +83,7 @@ GEM
     erubi (1.10.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hiredis (0.6.3)
     i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -190,8 +191,10 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  hiredis (~> 0.6.3)
   puma (~> 5.0)
   rails (~> 7.0.1)
+  redis (~> 4.5)
   stimulus_reflex (~> 3.5.0.pre.pre8)
   tzinfo-data
   vite_rails (~> 3.0)
