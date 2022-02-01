@@ -9,6 +9,8 @@
   },
   "devDependencies": {
     "vite": "^2.7.7",
-    "vite-plugin-ruby": "^3.0.5"
+    "vite-plugin-full-reload": "^1.0.0",
+    "vite-plugin-ruby": "^3.0.5",
+    "vite-plugin-stimulus-hmr": "^3.0.0"
   }
 }
