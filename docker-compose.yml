@@ -1,0 +1,44 @@
+# docker-compose isn't used by Fly, but can be used for doing quick dev checks of the Dockerfile setup
+
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      args:
+        RAILS_ENV: development
+        BUNDLE_WITHOUT: test
+        RUBY_VERSION: 3.0.3
+        NODE_VERSION: 14
+        BUNDLER_VERSION: 2.3.5
+    entrypoint: ["/rails/bin/docker-compose-entrypoint"]
+    command: "rails s -p 3000 -b 0.0.0.0"
+    volumes:
+      - .:/rails:cached
+      - rails_cache:/rails/tmp/cache
+      - assets:/rails/public/assets
+    environment:
+      RAILS_ENV: development
+      REDIS_URL: redis://redis:6379/
+      BOOTSNAP_CACHE_DIR: /usr/local/bundle/_bootsnap
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:6.2.5-alpine
+    volumes:
+      - redis:/data
+    ports:
+      - "6379"
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  redis:
+  rails_cache:
+  assets:
