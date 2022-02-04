@@ -9,4 +9,5 @@ test:
 production:
   adapter: redis
   url: <%= "redis://#{ENV['FLY_REGION']}.#{ENV['REDIS_HOST']}/1" %>
+  password: <%= ENV.fetch("REDIS_PASSWORD", "password") %>
   channel_prefix: global_presence_production

@@ -49,7 +49,8 @@ Rails.application.configure do
   # Use a different cache store in production.
   config.cache_store = :redis_cache_store, {
     driver: :hiredis,
-    url: "redis://#{ENV['FLY_REGION']}.#{ENV['REDIS_HOST']}/1"
+    url: "redis://#{ENV['FLY_REGION']}.#{ENV['REDIS_HOST']}/1",
+    password: ENV.fetch("REDIS_PASSWORD", "password")
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
