@@ -19,6 +19,7 @@ services:
       - assets:/rails/public/assets
     environment:
       RAILS_ENV: development
+      VITE_RUBY_AUTO_BUILD: "false"
       REDIS_URL: redis://redis:6379/
       BOOTSNAP_CACHE_DIR: /usr/local/bundle/_bootsnap
     ports:

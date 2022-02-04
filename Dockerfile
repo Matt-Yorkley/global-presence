@@ -61,6 +61,6 @@ RUN bundle config --global frozen 1 \
 
 COPY . .
 
-RUN bundle exec rake assets:precompile
+RUN VITE_RUBY_AUTO_BUILD=false bundle exec rake assets:precompile
 
 CMD rails s -p 3000 -b 0.0.0.0
