@@ -190,12 +190,13 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  cable_ready (= 5.0.0.pre8)
   debug
   hiredis (~> 0.6.3)
   puma (~> 5.0)
   rails (~> 7.0.1)
   redis (~> 4.5)
-  stimulus_reflex (~> 3.5.0.pre.pre8)
+  stimulus_reflex (= 3.5.0.pre8)
   tzinfo-data
   vite_rails (~> 3.0)
   web-console

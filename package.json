@@ -4,6 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "@rails/actioncable": "^7.0.1",
+    "cable_ready": "https://github.com/cableready/dev-builds/archive/cable_ready/1bded05.tar.gz",
     "stimulus": "^3.0.1",
     "stimulus-vite-helpers": "^3.0.0",
     "stimulus_reflex": "3.5.0-pre8"

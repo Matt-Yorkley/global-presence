@@ -43,7 +43,8 @@ end
 
 gem "vite_rails", "~> 3.0"
 
-gem "stimulus_reflex", "~> 3.5.0-pre8"
+gem "stimulus_reflex", "3.5.0.pre8"
+gem "cable_ready", "5.0.0.pre8"
 
 gem "redis", "~> 4.5", require: ['redis', 'redis/connection/hiredis']
 
