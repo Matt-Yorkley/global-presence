@@ -28,9 +28,9 @@ class EventBroadcaster
   end
 
   def toggle_light(key)
-    data = JSON.parse(redis.get(key) || "{}")
+    lightbulb_data = EventKeys.get_lightbulb_state
 
-    if data["on"]
+    if lightbulb_data["on"]
       cable_ready["telegraph"].add_css_class("#lightbulb", name: "on")
     else
       cable_ready["telegraph"].remove_css_class("#lightbulb", name: "on")
@@ -38,7 +38,7 @@ class EventBroadcaster
 
     cable_ready["telegraph"].inner_html(
       selector: "#lightswitch-label",
-      html: "Last clicked by: User ##{data["request_id"].to_s[0,8].upcase}"
+      html: "Last clicked by: User ##{lightbulb_data["request_id"].to_s[0,8].upcase}"
     )
   end
 
@@ -50,13 +50,9 @@ class EventBroadcaster
   end
 
   def append_hi_message(key)
-    message = JSON.parse(redis.lrange(key, 0, 1).first)
+    message = EventKeys.get_last_hi_message
 
     cable_ready["telegraph"].
       prepend("#messages-body", html: render(partial: "home/message", locals: { message: message }))
-  end
-
-  def redis
-    Rails.cache.redis
   end
 end

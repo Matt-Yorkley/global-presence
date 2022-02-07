@@ -10,15 +10,12 @@ class LightbulbReflex < ApplicationReflex
   private
 
   def set_lightbulb_state
-    current_state = JSON.parse((Rails.cache.redis.get("REGION:GLOBAL:LIGHT") || "{}"))["on"]
+    current_state = EventKeys.get_lightbulb_state["on"]
 
-    Rails.cache.redis.set(
-      "REGION:GLOBAL:LIGHT",
-      {
-        request_id: connection.request_id,
-        region: Region.current,
-        on: !current_state
-      }.to_json
+    EventKeys.set_lightbulb_state(
+      request_id: connection.request_id,
+      region: Region.current,
+      on: !current_state
     )
   end
 end

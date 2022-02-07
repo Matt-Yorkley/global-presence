@@ -10,16 +10,11 @@ class HiReflex < ApplicationReflex
   private
 
   def push_message_to_list(user_colour)
-    Rails.cache.redis.lpush(
-      "REGION:GLOBAL:SAYHI",
-      {
-        request_id: connection.request_id,
-        time: Time.now.to_i,
-        region: Region.current,
-        colour: user_colour
-      }.to_json
+    EventKeys.push_hi_message(
+      request_id: connection.request_id,
+      time: Time.now.to_i,
+      region: Region.current,
+      colour: user_colour
     )
-
-    Rails.cache.redis.ltrim("REGION:GLOBAL:SAYHI", 0, 10)
   end
 end

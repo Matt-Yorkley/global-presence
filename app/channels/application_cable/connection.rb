@@ -15,22 +15,24 @@ module ApplicationCable
     private
 
     def track_user_connected
-      tab_count = Rails.cache.increment("REGION:#{Region.current}:USERTABS:#{self.request_id}")
+      tab_count = EventKeys.increment_tab_count(Region.current, self.request_id)
 
       unless tab_count > 1
-        Rails.cache.increment("REGION:#{Region.current}:USERCOUNT")
+        EventKeys.increment_user_count(Region.current)
       end
     end
 
     def track_user_disconnected
-      tab_count = Rails.cache.read("REGION:#{Region.current}:USERTABS:#{self.request_id}", raw: true).to_i
-
-      if tab_count > 1
-        Rails.cache.decrement("REGION:#{Region.current}:USERTABS:#{self.request_id}")
+      if current_tab_count > 1
+        EventKeys.decrement_tab_count(Region.current, self.request_id)
       else
-        Rails.cache.delete("REGION:#{Region.current}:USERTABS:#{self.request_id}")
-        Rails.cache.decrement("REGION:#{Region.current}:USERCOUNT")
+        EventKeys.delete_tab_count(Region.current, self.request_id)
+        EventKeys.decrement_user_count(Region.current)
       end
+    end
+
+    def current_tab_count
+      EventKeys.get_tab_count(Region.current, self.request_id)
     end
   end
 end

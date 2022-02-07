@@ -39,11 +39,11 @@ class Region
     end
 
     def usercount(region_id)
-      Rails.cache.read("REGION:#{region_id}:USERCOUNT", raw: true)
+      EventKeys.get_user_count(region_id)
     end
 
     def tabcount(request_id)
-      Rails.cache.read("REGION:#{self.current}:USERTABS:#{request_id}", raw: true)
+      EventKeys.get_tab_count(self.current, request_id)
     end
   end
 end
