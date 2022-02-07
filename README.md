@@ -1,24 +1,6 @@
-# README
+# Global Presence: an experiment
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This mini-app is a little side project made for exploring cross-region events handling in **Multi-Region Applications**.
 
-Things you may want to cover:
+https://global-presence.fly.dev/
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
