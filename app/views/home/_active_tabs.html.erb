@@ -1,0 +1,38 @@
+<div class="py-20 bg-gray-100">
+  <div class="container max-w-screen-xl">
+    <div class="row align-items-center">
+      <div class="col-12">
+        <h2 class="ls-tight font-bolder display-6 mb-5">
+          You've got
+          <span id="tabcount"><%= Region.tabcount(@request_id).to_i.clamp(1..) %></span>
+          tab(s) open on this page
+
+          <div class="pulsing-dot text-lg">
+            <div class="dot"></div>
+            <div class="pulse"></div>
+          </div>
+        </h2>
+
+        <p class="lead mb-4">
+          I wasn't sure whether to leave this in or not, but here it is.
+        </p>
+
+        <p class="lead mb-4">
+          Tracking user presence is a bit tricky when a user can be viewing the same page actively in multiple
+          tabs at the same time. It's even more tricky when your app is deployed in multiple regions.
+          Multiple users, with multiple tabs, in multiple regions. There are some fun problems there...
+        </p>
+
+        <p class="lead mb-4">
+          As part of this experiment I ended up trying to keep a live count of the number of tabs each user
+          has open on this page in their current browser.
+          You'll see what I mean if you <a href="/" target="_blank">open another tab <i class="bi bi-box-arrow-up-right me-1"></i></a> or two...
+        </p>
+
+        <p class="lead mb-4">
+          Kinda creepy, right?
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

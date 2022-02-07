@@ -1,0 +1,97 @@
+@keyframes fade-in-show {
+  0%   {opacity: 0; visibility: hidden;}
+  1%   {opacity: 0.1; visibility: visible;}
+  99%  {opacity: 1; visibility: visible;}
+  100% {opacity: 1; visibility: visible;}
+}
+
+.animate-show {
+  opacity: 0;
+  visibility: hidden;
+  animation: fade-in-show 0.5s linear forwards 0s;
+}
+
+@keyframes expand-height-show {
+  0%   { max-height: 0px; }
+  100% { max-height: 4em; }
+}
+
+.animate-height-show {
+  max-height: 0;
+  animation: expand-height-show 0.1s ease forwards 0s;
+}
+
+#messages {
+  #messages-body {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: hidden;
+    height: 29em;
+  }
+}
+
+#leader {
+  background-image: url("~/images/presence.png");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: center;
+  background-size: contain;
+}
+
+#lightbulb {
+  min-height: 20em;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: top;
+  background-size: contain;
+
+  background-image: url("~/images/bulb-off.png");
+
+  &.on {
+    background-image: url("~/images/bulb-on.png");
+  }
+}
+
+
+@keyframes animate-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  45% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
+
+$pulse-colour: var(--x-green-400);
+
+.pulsing-dot {
+  position: relative;
+  width: 0.5em;
+  margin-top: 0.5em;
+  display: inline-block;
+  padding: 0.5em 0.75em;
+  font-size: 0.75em;
+
+  .dot {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    margin: -0.5em auto auto -0.5em;
+    background: $pulse-colour;
+    border-radius: 50%;
+    font-size: 0.75em;
+  }
+
+  .pulse {
+    position: absolute;
+    width: 1.2em;
+    height: 1.2em;
+    margin: -0.6em auto auto -0.6em;
+    border-radius: 50%;
+    border: 1px solid $pulse-colour;
+    opacity: 0;
+    animation: animate-pulse 1.5s ease-out infinite;
+  }
+}

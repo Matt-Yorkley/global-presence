@@ -1,0 +1,39 @@
+<div class="bg-purple-800">
+  <div class="container max-w-screen-xl">
+    <div class="row ">
+      <div class="col-8 col-lg-6 py-20">
+        <h2 class="ls-tight font-bolder display-5 mb-5 text-white">
+          Lightbulb Moments
+        </h2>
+
+        <p class="text-lg text-secondary mb-8">
+          If you click the switch below you can turn the lightbulb on or off. Pretty neat!
+        </p>
+
+        <p class="text-lg text-secondary mb-8">
+          The weird part is: *anybody else* who's currently viewing this page from anywhere
+          else in the world can also click the switch...
+        </p>
+
+        <button class="btn btn-primary" data-reflex="click->LightbulbReflex#toggle">
+          <i class="bi bi-power"></i>
+          Flip the switch
+        </button>
+
+        <label for="lightswitch" class="text-sm p-2 ps-4" id="lightswitch-label">
+          <% if @lightbulb_state["request_id"] %>
+            Last clicked by: User #<%= @lightbulb_state["request_id"].to_s[0,8].upcase %>
+          <% end %>
+        </label>
+      </div>
+
+      <div class="col-4 col-lg-6 ">
+        <div class="row">
+          <div class="col">
+            <div id="lightbulb" class="<%= @lightbulb_state["on"] ? "on" : "" %>" data-lightbulb-target="lightbulb"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

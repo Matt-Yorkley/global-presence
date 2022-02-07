@@ -1,0 +1,71 @@
+<% colour = ["", "tint-", "shade-"].sample + ["primary", "tertiary", "success", "warning", "info", "danger"].sample %>
+
+<div class="py-20 bg-gradient bg-blue-400">
+  <div class="container max-w-screen-xl">
+    <div class="row ">
+      <div class="col-12 col-lg-6 mb-8">
+        <h2 class="ls-tight font-bolder display-5 mb-5 text-white">
+          Hello world!
+        </h2>
+
+        <p class="text-lg text-white mb-8">
+          You've been assigned a computed ID and a random colour. What? You don't like the colour?! Refresh the page to get a new one.
+        </p>
+
+        <p class="text-lg text-white mb-8">
+          Anyway, here's what you currently look like from this app's point of view:
+        </p>
+
+        <div class="card shadow mt-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <span class="h3 font-bold mb-0">User #<%= @request_id.to_s[0,8].upcase %></span>
+                <span class="h6 font-semibold text-muted text-sm d-block mb-2">Anonymous User</span>
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-gradient bg-<%= colour %> text-white text-xl rounded-circle">
+                  <i class="bi bi-person"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer border-top">
+            <p>
+              <span class="text-nowrap mt-2 text-muted">
+                <i class="bi bi-box-arrow-in-right"></i>
+                Initial entrypoint:
+              </span>
+              <%= Region.human_name(request.headers["Fly-Region"]) %>
+            </p>
+            <p>
+              <span class="text-nowrap mt-2 text-muted">
+                <i class="bi bi-box-arrow-in-right"></i>
+                Connected datacenter:
+              </span>
+              <%= Region.human_name %>
+            </p>
+          </div>
+        </div>
+
+        <p class="text-lg text-white mt-8">
+          Feel free to say hi...
+        </p>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div id="messages" class="card">
+          <div id="messages-body" class="card-body">
+            <% @latest_messages.map do |message| %>
+              <%= render partial: "home/message", locals: { message: JSON.parse(message.to_s) } %>
+            <% end %>
+          </div>
+
+          <div id="messages-footer" class="card-footer bg-gray-100 border-top">
+            <button class="btn btn-primary" data-reflex="click->HiReflex#say_hi" data-colour="<%= colour %>">Say hi!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

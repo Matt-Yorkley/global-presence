@@ -1,0 +1,63 @@
+<div class="py-20 bg-gray-100 bg-gradient">
+  <div class="container max-w-screen-xl">
+    <div class="row mb-8">
+      <h2 class="ls-tight font-bolder display-6 mb-5 text-muted">
+        Global Presence: where is everyone?
+      </h2>
+
+      <p class="text-lg mb-4">
+        This mini-app is simultaneously deployed in <%= Region.deployed_regions.count %> different regions.
+        Anycast DNS routes incoming requests to the closest datacenter.
+        The closest edge-region your request passed through was <strong><%= Region.human_name(request.headers["Fly-Region"]) %></strong>
+        and the closest region the app could be served from was <strong><%= Region.human_name %></strong>.
+        They might be different regions. That last one is where you "are" currently, from the point of view of this app.
+      </p>
+
+      <p class="text-lg mb-4">
+        Below is a <strong>live-updated</strong> overview of all the others users currently viewing this page (per app-region):
+      </p>
+
+      <hr class="my-6 mb-4" />
+    </div>
+
+    <div class="row align-items-center">
+      <% Region.deployed_regions.each do |region| %>
+        <div class="col-12 col-sm-6 col-lg-4 mb-6">
+          <div class="card shadow border-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-auto">
+                  <i class="bi bi-server display-6"></i>
+                </div>
+
+                <div class="col">
+                  <span class="h3 font-bold mb-0">
+                    <%= Region.human_name(region).split(", ").first %>
+
+                    <div class="pulsing-dot">
+                      <div class="dot"></div>
+                      <div class="pulse"></div>
+                    </div>
+                  </span>
+                  <span class="h6 font-semibold text-muted text-sm d-block mb-2">
+                    <%= Region.human_name(region).split(", ").last %>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="card-footer border-top">
+              <div class="">
+                <span class="text-nowrap text-sm text-muted">
+                  Users on this page right now:
+                </span>
+                <%= render partial: "home/usercount", locals: { region_id: region, usercount: Region.usercount(region) } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

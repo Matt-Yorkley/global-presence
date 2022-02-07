@@ -37,5 +37,13 @@ class Region
     def human_name(region_id = nil)
       REGION_NAMES[(region_id || current).to_sym] || "Not found!? That's weird..."
     end
+
+    def usercount(region_id)
+      Rails.cache.read("REGION:#{region_id}:USERCOUNT", raw: true)
+    end
+
+    def tabcount(request_id)
+      Rails.cache.read("REGION:#{self.current}:USERTABS:#{request_id}", raw: true)
+    end
   end
 end

@@ -1,0 +1,89 @@
+<div class="py-20 bg-gradient bg-blue-400">
+  <div class="container max-w-screen-xl">
+    <div class="row ">
+
+      <div class="col-12">
+        <h2 class="ls-tight font-bolder display-5 mb-12 text-white">
+          Frequently Asked Questions
+        </h2>
+
+        <p class="font-bold text-lg text-white mb-2">
+          Is that it?
+        </p>
+
+        <p class="text-lg text-white mb-8">
+          Yes.
+        </p>
+
+        <p class="font-bold text-lg text-white mb-2">
+          What's the point?
+        </p>
+
+        <p class="text-lg text-white mb-8">
+          The little examples here might seem quite trivial from the user perspective, but the backend that's
+          powering them is the interesting bit, and the point of the POC.
+          A lot of other more interesting/useful/complex features could be built on top of it very easily.
+        </p>
+
+        <p class="text-lg text-white mb-8">
+          Take the lightswitch example; if a user in Canada clicks the switch, that event
+          will be propagated out to all app-regions and translated into <strong>live DOM updates</strong>
+          for users in say France and Australia and India, in close to "real-time".
+        </p>
+
+        <p class="font-bold text-lg text-white mb-2">
+          Does it use some kind of polling on the client side?
+        </p>
+
+        <p class="text-lg text-white mb-8">
+          Nope. That would be really slow and inefficient! :P
+        </p>
+
+        <p class="font-bold text-lg text-white mb-2">
+          Is this built with &lt;insert Hot Javascript Framework here&gt;?
+        </p>
+
+        <p class="text-lg text-white mb-8">
+          Nope. It's actually server-side-rendered HTML (old-school, huh?). I wrote a few lines of StimulusJS at one point
+          but I deleted them later, so the total LOC for hand-written Javascript is actually zero.
+        </p>
+
+        <p class="font-bold text-lg text-white mb-2">
+          What's the stack then?
+        </p>
+
+        <p class="text-lg text-white mb-8">
+          The underlying web framework is <strong>Ruby on Rails</strong> <i class="bi bi-heart-fill text-danger"></i><br />
+          The interactive parts are built with <strong>StimulusReflex</strong> and it's sister-library <strong>CableReady</strong>  <i class="bi bi-heart-fill text-danger"></i><br />
+          The multi-region deployments are done with <strong>Fly.io</strong> <i class="bi bi-heart-fill text-danger"></i><br />
+          The data store is a geographically distributed multi-active <strong>KeyDB</strong> setup (think multiregion-Redis-on-steroids) <i class="bi bi-heart-fill text-danger"></i><br />
+        </p>
+
+        <p class="font-bold text-lg text-white mb-2">
+          How does it work?
+        </p>
+
+        <p class="text-lg text-white mb-8">
+          TLDR; Websockets and pixie dust.<br /><br />
+          1) Initial interactions from client -> server happen over a Websocket with <strong>StimulusReflex</strong> via Rails's <strong>ActionCable</strong>.<br />
+          2) From there, event-data can be pushed into the distributed <strong>KeyDB</strong> cache-store for the current region (with very fast writes).<br />
+          3) Data written to a cache instance in one region is propagated to the cache instances in all other regions (1->N) with eventual consistency (it's fast though!). Or; automatic cross-region replication in a mesh topology where each node is both "active" and a "replica". <br />
+          4) There's a custom pub-sub implementation on top of <em>that</em>, which listens for *keychange events* in each <strong>KeyDB</strong> instance, and acts on them. This might be incoming "event-data" from another region, for example. Cache keys are customised to include the region of origin.<br />
+          5) <em>That's</em> then hooked up to <strong>CableReady</strong> (which allows pushing/broadcasting DOM updates/changes to N clients, from the server side) based on those pub-sub events. In this <em>particular</em> case, the "server-side" in question could be another server on another continent.<br />
+        </p>
+
+        <p class="text-lg text-white mb-8">
+          That might sound pretty complicated, but TBH the tools and frameworks in the stack make it surprisingly simple!
+        </p>
+
+        <p class="font-bold text-lg text-white mb-2">
+          How come it's weirdly broken when I use the Tor Browser?
+        </p>
+
+        <p class="text-lg text-white mb-8">
+          I'm not sure! I'll try to fix that soon...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

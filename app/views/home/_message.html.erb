@@ -1,0 +1,14 @@
+<div class="message row mt-5 animate-height-show">
+  <div class="col-auto">
+    <div class="icon icon-shape bg-gradient bg-<%= message["colour"] %> text-white text-xl rounded-circle">
+      <i class="bi bi-person"></i>
+    </div>
+  </div>
+  <div class="col">
+    <p>
+      <span class="font-bold">User #<%= message["request_id"].to_s[0,8].upcase %> </span>
+      <span class="ms-1 text-muted"><%= Time.at(message["time"].to_i).strftime("%I:%M %p") %> (UTC)</span>
+    </p>
+    <p>Hi from <%= Region.human_name(message["region"]) %> 👋</p>
+  </div>
+</div>
