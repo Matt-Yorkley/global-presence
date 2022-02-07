@@ -9,4 +9,12 @@ export default defineConfig({
     FullReload(['config/routes.rb', 'app/views/**/*'], { delay: 200 }),
     StimulusHMR(),
   ],
+  resolve: {
+    alias: [
+      {
+        find: "~bootstrap",
+        replacement: "bootstrap"
+      }
+    ]
+  }
 })
