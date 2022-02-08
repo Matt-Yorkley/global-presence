@@ -4,7 +4,7 @@ class TelegraphChannel < ApplicationCable::Channel
   delegate :render, to: ::ApplicationController
 
   def subscribed
-    stream_from "telegraph"
+    stream_from "#{Region.current}:telegraph"
 
     broadcast_user_count
   end
@@ -12,7 +12,7 @@ class TelegraphChannel < ApplicationCable::Channel
   private
 
   def broadcast_user_count
-    cable_ready["telegraph"].replace(
+    cable_ready["#{Region.current}:telegraph"].replace(
       selector: "##{Region.current}_usercount",
       html: render(partial: "home/usercount",
                    locals: { region_id: Region.current, usercount: Region.usercount(Region.current) })
