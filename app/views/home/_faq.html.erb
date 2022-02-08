@@ -67,21 +67,13 @@
           TLDR; Websockets and pixie dust.<br /><br />
           1) Initial interactions from client -> server happen over a Websocket with <strong>StimulusReflex</strong> via Rails's <strong>ActionCable</strong>.<br />
           2) From there, event-data can be pushed into the distributed <strong>KeyDB</strong> cache-store for the current region (with very fast writes).<br />
-          3) Data written to a cache instance in one region is propagated to the cache instances in all other regions (1->N) with eventual consistency (it's fast though!). Or; automatic cross-region replication in a mesh topology where each node is both "active" and a "replica". <br />
+          3) Data written to a cache instance in one region is propagated to the cache instances in all other regions (1->N) with eventual consistency (it's fast though!). Or to put it another way; automatic cross-region replication in a mesh topology where each node is both "active" and a "replica". <br />
           4) There's a custom pub-sub implementation on top of <em>that</em>, which listens for *keychange events* in each <strong>KeyDB</strong> instance, and acts on them. This might be incoming "event-data" from another region, for example. Cache keys are customised to include the region of origin.<br />
           5) <em>That's</em> then hooked up to <strong>CableReady</strong> (which allows pushing/broadcasting DOM updates/changes to N clients, from the server side) based on those pub-sub events. In this <em>particular</em> case, the "server-side" in question could be another server on another continent.<br />
         </p>
 
         <p class="text-lg text-white mb-8">
           That might sound pretty complicated, but TBH the tools and frameworks in the stack make it surprisingly simple!
-        </p>
-
-        <p class="font-bold text-lg text-white mb-2">
-          How come it's weirdly broken when I use the Tor Browser?
-        </p>
-
-        <p class="text-lg text-white mb-8">
-          I'm not sure! I'll try to fix that soon...
         </p>
       </div>
     </div>
