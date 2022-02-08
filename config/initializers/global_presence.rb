@@ -3,5 +3,9 @@ Rails.application.config.to_prepare do
   EventKeys.clear_transient
 
   # Run KeySubscriber in a separate thread
-  Thread.new { KeySubscriber.new }
+  Thread.new do
+    Rails.application.executor.wrap do
+      KeySubscriber.new
+    end
+  end
 end
